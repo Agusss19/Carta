@@ -1,0 +1,134 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Para vos, mi amor</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #fff0f0;
+      color: #5a2a2a;
+      text-align: center;
+      padding: 30px;
+      margin: 0;
+    }
+
+    .card {
+      background: #ffe6e6;
+      border-radius: 15px;
+      padding: 25px;
+      max-width: 90%;
+      width: 500px;
+      margin: 40px auto;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    }
+
+    h1 {
+      color: #c2185b;
+      font-size: 1.8em;
+    }
+
+    .hidden {
+      display: none;
+    }
+
+    .heart {
+      font-size: 48px;
+      animation: beat 1s infinite;
+    }
+
+    @keyframes beat {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.2); }
+    }
+
+    input[type="date"] {
+      padding: 10px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      font-size: 16px;
+      width: 80%;
+      max-width: 300px;
+    }
+
+    button {
+      padding: 10px 20px;
+      background-color: #c2185b;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-size: 16px;
+      cursor: pointer;
+      margin-top: 10px;
+    }
+
+    button:hover {
+      background-color: #a0154a;
+    }
+
+    @media (max-width: 600px) {
+      .card {
+        padding: 20px;
+      }
+
+      h1 {
+        font-size: 1.5em;
+      }
+    }
+  </style>
+</head>
+<body>
+  <audio id="bgMusic" loop>
+    <source src="https://www.dropbox.com/scl/fi/y92ndmbsn5dfp7n5nwo1k/Fix-You-Coldplay.mp3?rlkey=dhrk2dm64blty9wbc7ddxbiht&raw=1" type="audio/mpeg">
+    Tu navegador no soporta audio HTML5.
+  </audio>
+
+  <div id="pre-message" class="card">
+    <h1>💌 ¿Estás lista para abrir esta cartita?</h1>
+    <p>Elegí una fecha mágica para desbloquearla:</p>
+    <input type="date" id="dateInput" />
+    <br />
+    <button onclick="checkDate()">Desbloquear</button>
+    <br /><br />
+    <button id="playButton" onclick="playMusic()" class="hidden">🔊 Activar música</button>
+    <p id="error-msg" style="color: #c2185b; margin-top: 10px;"></p>
+  </div>
+
+  <div id="love-letter" class="card hidden">
+    <h1>❤️ Felices 5 meses, mi amor</h1>
+    <p>
+      Hoy cumplimos 5 meses y no puedo estar más feliz de tenerte en mi vida.<br />
+      Gracias por hacer que todo sea más lindo, más dulce, más vos.<br /><br />
+      Te amo con el alma, mugrecita hermosa. 💘
+    </p>
+    <div class="heart">💖</div>
+  </div>
+
+  <script>
+    function checkDate() {
+      const inputDate = document.getElementById("dateInput").value;
+      const correctDate = "2024-11-16";
+      const errorMsg = document.getElementById("error-msg");
+      const music = document.getElementById("bgMusic");
+
+      if (inputDate === correctDate) {
+        document.getElementById("pre-message").classList.add("hidden");
+        document.getElementById("love-letter").classList.remove("hidden");
+        music.play().catch(() => {
+          document.getElementById("playButton").classList.remove("hidden");
+        });
+      } else {
+        errorMsg.textContent = "Mmm... esa no es la fecha especial. Probá de nuevo 🕵️‍♀️";
+      }
+    }
+
+    function playMusic() {
+      const music = document.getElementById("bgMusic");
+      music.play();
+      document.getElementById("playButton").classList.add("hidden");
+    }
+  </script>
+</body>
+</html>
